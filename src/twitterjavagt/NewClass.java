@@ -25,13 +25,27 @@ import twitter4j.conf.ConfigurationBuilder;
 public class NewClass {
 
     
+     public Twitter getTwitter(){
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+        .setOAuthConsumerKey("*")
+        .setOAuthConsumerSecret("*")
+        .setOAuthAccessToken("*")
+        .setOAuthAccessTokenSecret("*");
+        TwitterFactory tf = new TwitterFactory(cb.build());
+        Twitter twitter = tf.getInstance();
+        
+        return twitter;
+    }
+    
+    
     /**
      *Esto envía tuits
      * @throws TwitterException
      */
     public void tweet() throws TwitterException {
         String latestStatus = JOptionPane.showInputDialog(null, "Escribe el Tweet");
-        Twitter twitter = TwitterFactory.getSingleton();
+        Twitter twitter = getTwitter();
         Status status = twitter.updateStatus(latestStatus);
         JOptionPane.showMessageDialog(null,"El Tweet [ " + status.getText() + " ] se ha enviado.");
     }
@@ -42,7 +56,7 @@ public class NewClass {
      * @throws TwitterException
      */
     public void timeLine() throws TwitterException {
-        Twitter twitter = TwitterFactory.getSingleton();
+        Twitter twitter = getTwitter();
         List<Status> statuses = twitter.getHomeTimeline();
         System.out.println("Showing home timeline.");
         for (Status status : statuses) {
@@ -58,7 +72,7 @@ public class NewClass {
      * @throws TwitterException
      */
     public void searchTweet(String busqueda) throws TwitterException {
-        Twitter twitter = TwitterFactory.getSingleton();
+        Twitter twitter = getTwitter();
         Query query = new Query(busqueda);
         QueryResult result = twitter.search(query);
         for (Status status : result.getTweets()) {
