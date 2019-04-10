@@ -24,7 +24,9 @@ import twitter4j.conf.ConfigurationBuilder;
  */
 public class NewClass {
 
-    
+     /**
+     *Al sustituir el * por las respectivas claves del api te da acceso a hacer las 3 acciones de este programa
+     */
      public Twitter getTwitter(){
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
